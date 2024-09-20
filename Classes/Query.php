@@ -33,7 +33,7 @@ class Query{
 
     $stmt =$this->pdo->prepare($sql);
     foreach($fieldvalues as $key=>$value){
-      $stmt->bindParam(':'.$fieldname[$key],$fieldvalues);
+      $stmt->bindParam(':'. $fieldname[$key],$fieldvalues[$key]);
     }
     
 
