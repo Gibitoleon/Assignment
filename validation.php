@@ -12,6 +12,12 @@ if($_SERVER["REQUEST_METHOD"]==="POST"){
     $firstname=filter_input(INPUT_POST, 'Firstname', FILTER_SANITIZE_SPECIAL_CHARS);
     $lastname=filter_input(INPUT_POST, 'lastname', FILTER_SANITIZE_SPECIAL_CHARS);;
     $password=filter_input(INPUT_POST, 'Password', FILTER_SANITIZE_SPECIAL_CHARS);;
+
+
+    $fieldname =['email','username','firstname','lastname','password'];
+    $values  =[$email,$username,$firstname,$lastname,$password];
+
+    $data = array_combine($fieldname,$values);
    
 
   $message = $queryObj->insert($email,$Username,$firstname,$lastname,$password);
