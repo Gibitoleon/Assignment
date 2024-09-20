@@ -13,14 +13,14 @@ if($_SERVER["REQUEST_METHOD"]==="POST"){
     $lastname=filter_input(INPUT_POST, 'lastname', FILTER_SANITIZE_SPECIAL_CHARS);;
     $password=filter_input(INPUT_POST, 'Password', FILTER_SANITIZE_SPECIAL_CHARS);;
 
-
+    $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
     $fieldname =['email','username','firstname','lastname','password'];
-    $values  =[$email,$username,$firstname,$lastname,$password];
+    $values  =[$email,$Username,$firstname,$lastname,$hashedPassword];
 
     $data = array_combine($fieldname,$values);
    
 
-  $message = $queryObj->insert($email,$Username,$firstname,$lastname,$password);
+  $message = $queryObj->insert('users',$data);
    
 
  echo json_encode($message);

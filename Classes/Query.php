@@ -14,20 +14,28 @@ class Query{
    }
 
 
- public function insert($email,$username,$firstname,$lastname,$password,){
+ public function insert($table,$data){
+    $fieldname = array_keys($data);
+    $fieldvalues =array_values($data);
+    $newfieldname =implode(',',$fieldname);
+   // $newfieldvalues =implode(','.$fieldvalues);
 
-    $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+    $placeholder =implode(',',array_map(function($name){
+      return ':' .$name;
+     },$fieldname));
+       
+    
+
 
     try{
-    $sql ="INSERT INTO users(email,username,firstname,lastname,password)
-    VALUES(:email,:username,:firstname,:lastname,:password)";
+    $sql ="INSERT INTO $table($newfieldname)
+    VALUES($placeholder)";
 
     $stmt =$this->pdo->prepare($sql);
-    $stmt->bindParam(':email', $email);
-    $stmt->bindParam(':username', $username);
-    $stmt->bindParam(':firstname', $firstname);
-    $stmt->bindParam(':lastname', $lastname);
-    $stmt->bindParam(':password', $hashedPassword);
+    foreach($fieldvalues as $key=>$value){
+      $stmt->bindParam(':'.$fieldname[$key],$fieldvalues);
+    }
+    
 
 
     $stmt->execute();
