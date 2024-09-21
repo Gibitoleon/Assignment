@@ -2,6 +2,7 @@
 
  
  class Profile{
+    
         private $email;
         private $firstname;
         private $lastname;
@@ -22,6 +23,9 @@
     
     
     public function showprofile(){
+        
+       
+    
         ?>
   <!DOCTYPE html>
 <html lang="en">
@@ -43,7 +47,7 @@
                         <h4>Profile</h4>
                     </div>
                     <div class="card-body">
-                        <h5 class="card-title">Welcome :<?= $this->username?></h5>
+                        <h5 class="card-title">Welcome :<?=$this->username?></h5>
                         <p class="card-text"><strong>Email:</strong><?=$this->email?></p>
                         <p class="card-text"><strong>Username:</strong><?= $this->username?></p>
                         <p class="card-text"><strong>First Name:</strong><?= $this->firstname?></p>
