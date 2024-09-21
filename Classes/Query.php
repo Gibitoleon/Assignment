@@ -41,18 +41,14 @@ class Query{
     $stmt->execute();
 
      if($stmt->rowcount()>0){
-        return ["Status"=>"Success","msg"=>"successful registration!"];
+        return true;
      }
-       return ["Status"=>"failed","msg"=>"failed registration"];
+       return false;
 
     }catch(PDOException $e){
 
       
-        if ($e->getCode() == 23000) {
-            return ["Status"=>"failed","msg"=>"email already exist"];
-
-        } 
-         return ["Status"=>"failed","msg" =>"errors :" . $e->getMessage()];
+       throw $e;
         
 
     }
