@@ -17,12 +17,17 @@ if($_SERVER["REQUEST_METHOD"]==="POST"){
         $message = ['status' => 'error', 'msg' => 'Invalid password'];
     }
     else{
-     //send a successful login message
-     $message = ['status' => 'success', 'msg' => 'Login successful'];
-     //establish a session for the authenticated user
+      //establish a session for the authenticated user
     
-     $_SESSION['user_id'] = $user['id'];  
+      session_start();
+     $_SESSION['id'] = $user['id'];  
      $_SESSION['email'] = $user['email'];  
+    //var_dump($_SESSION['user_id'],$_SESSION['email']);
+
+     //send a successful message on log in
+     $message = ['status' => 'success', 'msg' => 'Login successful'];
+     
+    
     }
    }
    
