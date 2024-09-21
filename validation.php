@@ -19,10 +19,31 @@ if($_SERVER["REQUEST_METHOD"]==="POST"){
 
     $data = array_combine($fieldname,$values);
    
+ try{
+    $query = $queryObj->insert('users',$data);
+    if ($query){
+   $message = ["Status"=>"Success","msg"=>"successful registration!"];
+  }
+   else{
+       $message =["Status"=>"failed","msg"=>"failed registration"];
+   }
 
-  $message = $queryObj->insert('users',$data);
+ }catch(PDOException $e){
+    if ($e->getCode() == 23000) {
+      $message = ["Status"=>"failed","msg"=>"email already exist"];
+
+    } 
+    else{
+       $message =["Status"=>"failed","msg" =>"errors :could not execute query"];
+    }
    
+    
 
+}
+
+     
+ 
+ 
  echo json_encode($message);
  
 }
