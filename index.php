@@ -1,24 +1,27 @@
 <?php
+
 require_once 'load.php';
+session_start();
+if(isset($_SESSION['email'],$_SESSION['id'])){
+//access user details for display in the UI
+$user =$queryObj->selectEmail($_SESSION['email']);
+
+$email =$user['email'];
+$firstname =$user['firstname'];
+$lastname =$user['lastname'];
+$username =$user['username'];
+
+$ProfileObj = new Profile($email,$firstname,$lastname,$username);
+$ProfileObj->showprofile();
 
 
-
-$userid =$_SESSION['user_id'];
-$email =  $_SESSION['email'];
-
- if (!isset($userid)) {
+}
+else{
+ 
     // Redirect to login if user is not logged in
-    header("Location: login.php");
+    header("Location:login.php");
     exit();
  }
+ 
 
- //access user details for display in the UI
-  $user =$queryObj->selectEmail($email);
-
-   $email =$user['email'];
-   $firstname =$user['firstname'];
-   $lastname =$user['lastname'];
-   $username =$user['username'];
-
- $ProfileObj = new Profile($email,$firstname,$lastname,$username);
- $ProfileObj->showprofile();
+ 
