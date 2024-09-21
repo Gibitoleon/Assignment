@@ -10,7 +10,7 @@ CREATE TABLE users (
    password VARCHAR(255) NOT NULL  DEFAULT '',
    
 
-   PRIMARY_KEY(userId),
+   PRIMARY_KEY(id),
   
 
 )

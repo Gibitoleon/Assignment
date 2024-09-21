@@ -14,7 +14,7 @@ class Query{
    }
 
 
- public function insert($table,$data){
+ public function insert($table,$data) {
     $fieldname = array_keys($data);
     $fieldvalues =array_values($data);
     $newfieldname =implode(',',$fieldname);
@@ -47,6 +47,7 @@ class Query{
 
     }catch(PDOException $e){
 
+      
         if ($e->getCode() == 23000) {
             return ["Status"=>"failed","msg"=>"email already exist"];
 
