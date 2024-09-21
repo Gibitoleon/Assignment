@@ -1,14 +1,7 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
-//require_once "Classes/RegistrationC.php";
-//require_once "Classes/Dbconnection.php";
-//require_once "Classes/Query.php";
-//require_once "Classes/loginC.php";
-//require_once "Classes/Profile.php";
-
+require 'vendor/autoload.php';
+use Dotenv\Dotenv;
+ //loading required files
 function classAutoload($classname){
     $directory ="Classes";
     $filename = dirname(__FILE__).DIRECTORY_SEPARATOR .$directory .DIRECTORY_SEPARATOR .$classname .".php";
@@ -18,7 +11,22 @@ function classAutoload($classname){
 }
  spl_autoload_register('classAutoload');
 
+ //loading the dotenv file
+ 
+$dotenv = Dotenv::createImmutable(__DIR__ );
+$dotenv->load();
+ $username= $_ENV['EMAIL_USERNAME'];
+ $password =$_ENV['EMAIL_PASSWORD'];
+
+ 
+ 
+ echo $_ENV['EMAIL_USERNAME'],$_ENV['EMAIL_PASSWORD'];
+
 $regObj = new Registration();
 $queryObj = new Query();
 $logObj = new Login();
+$verObj = new Verification();
+$mailObj = new Mail($username,$password);
+
+
 
