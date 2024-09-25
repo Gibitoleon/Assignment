@@ -20,8 +20,7 @@ $dotenv->load();
 
  
  
- echo $_ENV['EMAIL_USERNAME'],$_ENV['EMAIL_PASSWORD'];
-
+ 
 $regObj = new Registration();
 $queryObj = new Query();
 $logObj = new Login();
