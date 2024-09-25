@@ -32,7 +32,7 @@ form.addEventListener('submit',async(event)=>{
   
     Swal.fire({
       icon: 'success',
-      title:'Success',
+      title:'Successful registration',
       text: data.msg,
       showConfirmButton: false,
       timer: 2000
