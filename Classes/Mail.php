@@ -38,10 +38,10 @@ class Mail{
             $mail->AltBody = 'Hello'. $recipientname . 'This is you verification code:'. $code ;
 
             $mail->send();                                            // Send the email
-            echo 'Message has been sent';
+            echo 'Message has been sent to' .$recipientemail;
         } 
         catch (Exception $e) {
-        echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+        echo "Message could not be sent . Mailer Error: {$mail->ErrorInfo}";
         }
 
 
