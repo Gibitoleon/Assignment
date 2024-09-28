@@ -1,6 +1,6 @@
 <?php
 
-require 'vendor/autoload.php';
+require __DIR__.'/../vendor/autoload.php';
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
@@ -38,7 +38,7 @@ class Mail{
             $mail->AltBody = 'Hello'. $recipientname . 'This is you verification code:'. $code ;
 
             $mail->send();                                            // Send the email
-            echo 'Message has been sent to' .$recipientemail;
+        
         } 
         catch (Exception $e) {
         echo "Message could not be sent . Mailer Error: {$mail->ErrorInfo}";
