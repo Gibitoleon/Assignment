@@ -18,7 +18,7 @@ public function showform(){
 <div class="container">
     <div class="registration-form">
         <h2>Registration Form</h2>
-        <form id="form" action="validation.php">
+        <form id="form" action="Validation/Validation.php">
          <div class="form-group">
         <label for="exampleInputEmail1">Email address</label>
         <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"  name="email" placeholder="Enter email">
