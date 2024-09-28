@@ -15,8 +15,9 @@ form.addEventListener('submit',async(event)=>{
   })
   try {
    const {data} =  await axios.post(form.action,formdata)
+   console.log(await axios.post(form.action,formdata));
    console.log(data);
-   console.log('Data from server:', data);
+   console.log('Data from server:', data.msg);
    console.log('Status from server:', data.Status);
    console.log(form.action);
     if(data.Status==="failed"){
@@ -28,16 +29,15 @@ form.addEventListener('submit',async(event)=>{
     });
 
     }
-    else if (data.Status==="Success"){
+    else if (data.Status==="pending"){
   
     Swal.fire({
-      icon: 'success',
-      title:'Successful registration',
-      text: data.msg,
+      title: '🔒 Verify Your Email!',
+       text: `${data.msg}`,
       showConfirmButton: false,
       timer: 2000
   }).then(()=>{
-    window.location.href="login.php";
+    window.location.href="Verification.php";
   });
 }
     
@@ -49,7 +49,7 @@ form.addEventListener('submit',async(event)=>{
       text: `Could not execute: ${error.message}`,
       confirmButtonText: 'OK'
   });
-  }
+  } 
  
   
-})
+  });
