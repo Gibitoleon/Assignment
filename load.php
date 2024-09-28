@@ -3,11 +3,13 @@ require 'vendor/autoload.php';
 use Dotenv\Dotenv;
  //loading required files
 function classAutoload($classname){
-    $directory ="Classes";
+    $directories =['Classes','Utils'];
+    foreach($directories as $directory){
     $filename = dirname(__FILE__).DIRECTORY_SEPARATOR .$directory .DIRECTORY_SEPARATOR .$classname .".php";
     if(file_exists($filename) AND is_readable($filename)){
         require_once $filename;
     }
+}
 }
  spl_autoload_register('classAutoload');
 
@@ -26,6 +28,7 @@ $queryObj = new Query();
 $logObj = new Login();
 $verObj = new Verification();
 $mailObj = new Mail($username,$password);
-
+$sessionobj =new Session();
+$codeobj =new Codegenerator();
 
 
