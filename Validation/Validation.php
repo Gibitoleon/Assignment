@@ -1,7 +1,7 @@
 <?php
   
   require_once __DIR__ ."/../load.php";
-   
+   require_once 'send_email.php';
   
 
 
@@ -26,16 +26,43 @@
               $code = $codeobj ->generatecode();
 
               //set the session for  each input field
-               $fieldname =['email','username','Firstname','lastname','password','code'];
-                $values =[$email,$Username,$firstname,$lastname,$password,$code];
-               $data = array_combine($fieldname,$values);
-
+               $fieldname =['email'=>$email,'username'=>$Username,'firstname'
+               =>$firstname,'lastname'=>$lastname,'password'=>$lastname,'code'=>$code];
+                session_start();
+               foreach($fieldname as $field=>$value){
+                  $_SESSION[$field] =$value;
+               }
+              
                //function to set the session
-               $sessionobj->setsession($data);
-               $mailObj->sendmail($email,$firstname,$code);
-                $message =['Status'=>'pending','msg'=>' A verification code has been sent to your email. '];
-            
-                echo json_encode($message);
+                // $_SESSION['email'] =$email;
+                // $_SESSION['username']=$Username;
+                // $_SESSION['Firstname'] =$firstname;
+                // $_SESSION['lastname'] =$lastname;
+                // $_SESSION['passworD'] = $password;
+                // $_SESSION['code'] =$code;
+              
+                //sending request to email endpoint
+                 $newdata =[
+                    'email' => $email,
+                    'firstname' => $firstname,
+                    'code' => $code
+                 ];
+                  //encoding
+                 $jsonData = json_encode($newdata);
+                 $value =sendEmail($jsonData);
+                if($value){
+                 $message =['Status'=>'pending','msg'=>' A verification code has been sent to your email. '];
+                }
+                else{
+                  $message = ['Status' => 'failed', 'msg' => 'Failed to send verification email. Please try again later.'];
+                }
+                 echo json_encode($message);
+                
+                  
+                 
+                  
+                 
+                
               
 
               
