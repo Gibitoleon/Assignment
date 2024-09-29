@@ -27,8 +27,8 @@ $regObj = new Registration();
 $queryObj = new Query();
 $logObj = new Login();
 $verObj = new Verification();
-$mailObj = new Mail($username,$password);
-$sessionobj =new Session();
+//$mailObj = new Mail($username,$password);
+
 $codeobj =new Codegenerator();
 
 
