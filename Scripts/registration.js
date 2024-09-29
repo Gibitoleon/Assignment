@@ -15,7 +15,7 @@ form.addEventListener('submit',async(event)=>{
   })
   try {
    const {data} =  await axios.post(form.action,formdata)
-   console.log(await axios.post(form.action,formdata));
+   
    console.log(data);
    console.log('Data from server:', data.msg);
    console.log('Status from server:', data.Status);
