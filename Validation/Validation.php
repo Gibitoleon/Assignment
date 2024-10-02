@@ -17,17 +17,17 @@
 
               $Username=filter_input(INPUT_POST, 'Username', FILTER_SANITIZE_SPECIAL_CHARS);
               $firstname=filter_input(INPUT_POST, 'Firstname', FILTER_SANITIZE_SPECIAL_CHARS);
-              $lastname=filter_input(INPUT_POST, 'lastname', FILTER_SANITIZE_SPECIAL_CHARS);;
-              $password=filter_input(INPUT_POST, 'Password', FILTER_SANITIZE_SPECIAL_CHARS);;
+              $lastname=filter_input(INPUT_POST, 'lastname', FILTER_SANITIZE_SPECIAL_CHARS);
+              $password=trim(filter_input(INPUT_POST, 'Password', FILTER_SANITIZE_SPECIAL_CHARS));
 
               $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
               //Generate a unique code for each user
-              $code = $codeobj ->generatecode();
+              $code =trim( $codeobj ->generatecode());
 
               //set the session for  each input field
                $fieldname =['email'=>$email,'username'=>$Username,'firstname'
-               =>$firstname,'lastname'=>$lastname,'password'=>$lastname,'code'=>$code];
+               =>$firstname,'lastname'=>$lastname,'password'=>$hashedPassword,'code'=>$code];
                 session_start();
                foreach($fieldname as $field=>$value){
                   $_SESSION[$field] =$value;
