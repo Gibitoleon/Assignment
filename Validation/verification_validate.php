@@ -3,7 +3,7 @@
  require_once __DIR__ ."/../load.php";
 if($_SERVER["REQUEST_METHOD"]==="POST"){
 
-    $code=filter_input(INPUT_POST, 'verification_code', FILTER_SANITIZE_SPECIAL_CHARS);
+    $code=trim(filter_input(INPUT_POST, 'verification_code', FILTER_SANITIZE_SPECIAL_CHARS));
     $message =[];
 
     //getting them session variables
@@ -19,10 +19,10 @@ if($_SERVER["REQUEST_METHOD"]==="POST"){
 
 
     }
-    $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+   // $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
     $fieldname =['email','username','firstname','lastname','password'];
-    $values  =[$email,$Username,$firstname,$lastname,$hashedPassword];
+    $values  =[$email,$Username,$firstname,$lastname,$password];
 
          $data = array_combine($fieldname,$values);
 
@@ -38,7 +38,7 @@ if($_SERVER["REQUEST_METHOD"]==="POST"){
              if ($query){
              
                 $message =["Status"=>"Success","msg"=>" Successful registration"];
-            
+              
            }
            else{
                 $message =["Status"=>"failed","msg"=>"failed registration"];
