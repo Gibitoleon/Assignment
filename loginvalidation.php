@@ -26,7 +26,7 @@ if($_SERVER["REQUEST_METHOD"]==="POST"){
     else{
       //establish a session for the authenticated user
       //send a successful message on log in
-      $message = ['status' => 'error', 'msg' => 'Invalid password :'.$user['password']];
+      $message = ['status' => 'error', 'msg' => 'Invalid password'];
     
     //var_dump($_SESSION['user_id'],$_SESSION['email']);
 
