@@ -95,7 +95,7 @@ function validateUsername($key,$data){
  }
 
  function validatename($key,$data){
-    // Check for valid characters (only letters, hyphens, and apostrophes)
+    
      $data = trim($data);
     if (!preg_match("/^[a-zA-Z-']+$/", $data)) {
         return ['Status' => 'failed','key'=>$key, 'msg' => 'Name can only contain letters, hyphens, and apostrophes.'];

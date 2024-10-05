@@ -18,7 +18,7 @@ function sendEmail( $jsonData){
     // Close the cURL session
     curl_close($ch);
 
-      // Handle the response from Node.js
+      // Handle the response from Node.js server
     if ($httpCode == 200) {
         $responseData = json_decode($response, true);
        return true;

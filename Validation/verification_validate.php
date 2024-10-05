@@ -8,7 +8,7 @@ if($_SERVER["REQUEST_METHOD"]==="POST"){
 
     //getting them session variables
     session_start();
-    if(isset($_SESSION['code'])&& isset($_SESSION['email'])&& isset($_SESSION['username'])&& isset($_SESSION['password'])&& isset($_SESSION['firstname'])&&isset($_SESSION['lastname'])){
+    if(isset($_SESSION['code'])&& isset($_SESSION['email'])&& isset($_SESSION['username'])&& isset($_SESSION['password'])&& isset($_SESSION['firstname'])&&isset($_SESSION['lastname'])&&isset($_SESSION['codeexpiry'])){
 
       $newcode =$_SESSION['code'];
       $email =$_SESSION['email'];
@@ -16,17 +16,19 @@ if($_SERVER["REQUEST_METHOD"]==="POST"){
       $password =$_SESSION['password'];
       $firstname =$_SESSION['firstname'];
       $lastname =$_SESSION['lastname'];
+      $codeexpiry =$_SESSION['codeexpiry'];
 
 
     }
-   // $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+  
 
     $fieldname =['email','username','firstname','lastname','password'];
     $values  =[$email,$Username,$firstname,$lastname,$password];
 
          $data = array_combine($fieldname,$values);
 
-    
+    //check if the code has expired AND do the appropiate
+      
     //comparing the code  with the input  code
     if($code ===$newcode){
         
@@ -60,3 +62,10 @@ if($_SERVER["REQUEST_METHOD"]==="POST"){
    
     echo  json_encode($message);
 }
+
+$currenttime = time();
+//if($currenttime>$codeexpiry){
+// echo json_encode(['Status' => 'Info', 'msg' => 'The verification code has expired. Please request a new code.']);
+// exit;
+
+//}
