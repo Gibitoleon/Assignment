@@ -25,7 +25,7 @@
 
               //Generate a unique code for each user
               $code =trim( $codeobj ->generatecode());
-             // $codeexpiry = time() + 2*60;
+             
 
               //Array data for manipulation
                $fieldname =['email'=>$email,'username'=>$Username,'firstname'=>$firstname,'lastname'=>$lastname,'password'=>$password,'code'=>$code,'codeexpiry'=>$codeexpiry];
@@ -48,7 +48,7 @@
                           exit;
                         }
 
-                        // Check if there are any messages to show
+
                
                    
                        

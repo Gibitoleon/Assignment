@@ -63,9 +63,3 @@ if($_SERVER["REQUEST_METHOD"]==="POST"){
     echo  json_encode($message);
 }
 
-$currenttime = time();
-//if($currenttime>$codeexpiry){
-// echo json_encode(['Status' => 'Info', 'msg' => 'The verification code has expired. Please request a new code.']);
-// exit;
-
-//}
