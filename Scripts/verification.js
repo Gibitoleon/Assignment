@@ -40,6 +40,15 @@ form.addEventListener('submit',async(event)=>{
     }).then(()=>{
       window.location.href="login.php";
     });
+  } else if(data.Status==='Info'){
+    Swal.fire({
+      title: 'Oops',
+      text: `${data.msg}`,
+      icon: 'info', // Set the icon to info
+      confirmButtonText: 'Okay'
+    });
+
+
   }
       
       
