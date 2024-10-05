@@ -11,3 +11,8 @@
         text-align: center;
         margin-bottom: 20px;
     }
+
+    .Emailerror,.Usernameerror,.Firstnameerror,.lastnameerror,.Passworderror{
+        color:red;
+        text-align: center;
+    }
