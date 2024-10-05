@@ -22,34 +22,38 @@ public function showform(){
          <div class="form-group">
         <label for="exampleInputEmail1">Email address</label>
         <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"  name="email" placeholder="Enter email">
-    
+         <p class='Emailerror'></p>
        </div>
             <!-- Username Field -->
             <div class="form-group">
                 <label for="username">Username</label>
                 <input type="text" class="form-control" id="username" placeholder="Enter username"
-                name="Username" required>
+                name="Username" >
+                <p class='Usernameerror'></p>
             </div>
 
             <!-- First Name Field -->
             <div class="form-group">
                 <label for="firstName">First Name</label>
                 <input type="text" class="form-control" id="firstName" placeholder="Enter first name"
-                name="Firstname" required>
+                name="Firstname" >
+                <p class='Firstnameerror'></p>
             </div>
 
             <!-- Last Name Field -->
             <div class="form-group">
                 <label for="lastName">Last Name</label>
                 <input type="text" class="form-control" id="lastName" placeholder="Enter last name"
-                name="lastname" required>
+                name="lastname" >
+                <p class='lastnameerror'></p>
             </div>
 
             <!-- Password Field -->
             <div class="form-group">
                 <label for="password">Password</label>
                 <input type="password" class="form-control" id="password" placeholder="Enter password"
-                name="Password" required>
+                name="Password" >
+                <p class='Passworderror'></p>
             </div>
             <P> have an account?<a href="login.php">LogIn</a></P>
             <!-- Submit Button -->
