@@ -82,4 +82,53 @@ class Query{
    }
 
  }
-}
+
+ public function selectUsername($username){
+   try{
+   $sql ="SELECT COUNT(*) FROM users WHERE username =:username";
+
+   //create the statement
+   $stmt =$this->pdo->prepare($sql);
+   $stmt->bindParam(':username', $username, PDO::PARAM_STR);
+
+   //execute the statement
+   $stmt->execute();
+
+   //fetching the result
+   $count =$stmt->fetchColumn();
+    return $count;
+   }
+   catch(PDOException $e){
+
+      echo "could not execute query" . $e->getMessage() ;
+
+   }
+
+ }
+
+
+ public function selectUniqueEmail($email){
+   try{
+   $sql ="SELECT COUNT(*) FROM users WHERE email =:email";
+
+   //create the statement
+   $stmt =$this->pdo->prepare($sql);
+   $stmt->bindParam(':email', $email, PDO::PARAM_STR);
+
+   //execute the statement
+   $stmt->execute();
+
+   //fetching the result
+   $count =$stmt->fetchColumn();
+    return $count;
+   }
+   catch(PDOException $e){
+
+      echo "could not execute query" . $e->getMessage() ;
+
+   }
+
+ }
+
+
+ }
