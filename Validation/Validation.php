@@ -2,6 +2,7 @@
   
   require_once __DIR__ ."/../load.php";
    require_once 'send_email.php';
+   require_once 'validatefunction.php';
   
 
 
@@ -15,100 +16,124 @@
 
           }
 
-              $Username=filter_input(INPUT_POST, 'Username', FILTER_SANITIZE_SPECIAL_CHARS);
-              $firstname=filter_input(INPUT_POST, 'Firstname', FILTER_SANITIZE_SPECIAL_CHARS);
-              $lastname=filter_input(INPUT_POST, 'lastname', FILTER_SANITIZE_SPECIAL_CHARS);
+              $Username=trim(filter_input(INPUT_POST, 'Username', FILTER_SANITIZE_SPECIAL_CHARS));
+              $firstname=trim(filter_input(INPUT_POST, 'Firstname', FILTER_SANITIZE_SPECIAL_CHARS));
+              $lastname=trim(filter_input(INPUT_POST, 'lastname', FILTER_SANITIZE_SPECIAL_CHARS));
               $password=trim(filter_input(INPUT_POST, 'Password', FILTER_SANITIZE_SPECIAL_CHARS));
 
-              $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+            
 
               //Generate a unique code for each user
               $code =trim( $codeobj ->generatecode());
 
-              //set the session for  each input field
-               $fieldname =['email'=>$email,'username'=>$Username,'firstname'
-               =>$firstname,'lastname'=>$lastname,'password'=>$hashedPassword,'code'=>$code];
-                session_start();
-               foreach($fieldname as $field=>$value){
-                  $_SESSION[$field] =$value;
-               }
+              //Array data for manipulation
+               $fieldname =['email'=>$email,'username'=>$Username,'firstname'=>$firstname,'lastname'=>$lastname,'password'=>$password,'code'=>$code];
+               
               
-               //function to set the session
-                // $_SESSION['email'] =$email;
-                // $_SESSION['username']=$Username;
-                // $_SESSION['Firstname'] =$firstname;
-                // $_SESSION['lastname'] =$lastname;
-                // $_SESSION['passworD'] = $password;
-                // $_SESSION['code'] =$code;
-              
-                //sending request to email endpoint
-                 $newdata =[
-                    'email' => $email,
-                    'firstname' => $firstname,
-                    'code' => $code
-                 ];
-                  //encoding
-                 $jsonData = json_encode($newdata);
-                 $value =sendEmail($jsonData);
-                if($value){
-                 $message =['Status'=>'pending','msg'=>' A verification code has been sent to your email. '];
-                }
-                else{
-                  $message = ['Status' => 'failed', 'msg' => 'Failed to send verification email. Please try again later.'];
-                }
-                 echo json_encode($message);
+               $messages =validate($fieldname);
+               $haserrors =false;
+                     foreach($messages as $key=>$data){
+                           if($data!==true){
+                            
+                            $messages[$key] =$data;
+                        
+                            $haserrors =true;
+                          
+                           }
+                          
+                          }
+                        if($haserrors){
+                          echo json_encode($messages);
+                          exit;
+                        }
+
+                        // Check if there are any messages to show
+               
+                   
+                       
+                       
+                        $fieldname['password'] =password_hash( $fieldname['password'], PASSWORD_DEFAULT);
+                         session_start();
+                        foreach($fieldname as $field=>$value){
+                           $_SESSION[$field] =$value;
+                        }
+                           //sending request to email endpoint
+                          $newdata =[
+                           'email' => $email,
+                           'firstname' => $firstname,
+                           'code' => $code
+                        ];
+                         //encoding
+                         $jsonData = json_encode($newdata);
+                         $value =sendEmail($jsonData);
+                         if($value){
+                         $message =['Status'=>'pending','msg'=>' A verification code has been sent to your email. '];
+                         echo json_encode($message);
+                       }
+                         else{
+                         $message = ['Status' => 'failedSend', 'msg' => 'Failed to send verification email. Please try again later.'];
+                         echo json_encode($message);
+                       }
+
+                       }
+                           
+                          
+                         
+                           
+                          
+
+                          
+                          
+                          
+                           
+                           
+                          
+                          
+                          
+
+                      
+                  
+                   
+                  
+                  
+                   
+                         
+                          
+                      
+                    
+                  
                 
                   
+   
                  
-                  
+                 
+                 
                  
                 
+
+                    
+                  
+                
+
+                  
               
 
-              
-              
-            
-           //  $fieldname =['email','username','firstname','lastname','password'];
-            // $values  =[$email,$Username,$firstname,$lastname,$hashedPassword];
+                 
 
-             // $data = array_combine($fieldname,$values);
-            
-            
-              
-            
-            
-              //insert data into the database
-         /* try{
-            $queryObj = new Query();
-           $query = $queryObj->insert('users',$data);
-             if ($query){
+
+                
+
+
+
+               
+
+               
+                
+               
+
              
-            
-            
-           }
-           else{
-                $message =["Status"=>"failed","msg"=>"failed registration"];
-            }
-
-          }catch(PDOException $e){
-             if ($e->getCode() == 23000) {
-                $message = ["Status"=>"failed","msg"=>"email already exist"];
-
-             } 
-             else{
-                $message =["Status"=>"failed","msg" =>"errors :could not execute query"];
-             }
-            
+               
               
-
-          }*/
-
-              
-          
-          
-          
-          
-          }
           
     
   
