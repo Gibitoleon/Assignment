@@ -28,7 +28,7 @@
              
 
               //Array data for manipulation
-               $fieldname =['email'=>$email,'username'=>$Username,'firstname'=>$firstname,'lastname'=>$lastname,'password'=>$password,'code'=>$code,'codeexpiry'=>$codeexpiry];
+               $fieldname =['email'=>$email,'username'=>$Username,'firstname'=>$firstname,'lastname'=>$lastname,'password'=>$password,'code'=>$code];
                
               
                $messages =validate($fieldname);
